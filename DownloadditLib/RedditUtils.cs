@@ -1,13 +1,14 @@
 ﻿namespace DownloadditLib
 {
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class RedditUtils : BaseUtils
+    public class RedditUtils
     {
-        public static void RetrievePage(
-            string url,
+        public static void ParsePage(
+            Uri url,
             out List<string> imageUrls,
             out List<string> albumUrls,
             out string nextPageUrl
@@ -16,7 +17,7 @@
             imageUrls = new List<string>();
             albumUrls = new List<string>();
 
-            string json = RetrieveTextFromHttp(url);
+            string json = HttpUtils.RetrieveTextFromHttp(url);
             RedditElement redditElement = JsonConvert.DeserializeObject<RedditElement>(json);
             foreach (RedditElement post in redditElement.Data.Children)
             {
@@ -38,7 +39,7 @@
             nextPageUrl = redditElement.Data.After;
         }
 
-        public static string BuildUrl(string entity, RedditEntity entityType, string cursor = null)
+        public static Uri BuildUrl(string entity, RedditEntity entityType, string cursor = null)
         {
             if (entity == null) return null;
 
@@ -55,7 +56,7 @@
             {
                 url += "?after=" + cursor;
             }
-            return url;
+            return new Uri(url);
         }
     }
 

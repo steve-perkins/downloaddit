@@ -44,7 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseUtils.cs" />
+    <Compile Include="HttpUtils.cs" />
+    <Compile Include="ImgurUtils.cs" />
     <Compile Include="RedditUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
