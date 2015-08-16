@@ -4,6 +4,7 @@
     using DownloadditLib;
     using System.Collections.Generic;
     using System;
+    using System.IO;
 
     [TestClass]
     public class LibTests
@@ -86,6 +87,19 @@
             Assert.IsTrue(imageUrls.Contains("http://i.imgur.com/TrYBtzx.jpg"));
             Assert.IsTrue(imageUrls.Contains("http://i.imgur.com/hCjiuQd.jpg"));
             Assert.IsTrue(imageUrls.Contains("http://i.imgur.com/rvw7Esb.jpg"));
+        }
+
+        [TestMethod]
+        public void TestDownloadBinaryFile()
+        {
+            string path = Path.Combine(Path.GetTempPath(), "S4C7aXQ.jpg");
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            HttpUtils.DownloadBinaryFile(new Uri("https://i.imgur.com/S4C7aXQ.jpg"), Path.GetTempPath());
+            Assert.IsTrue(File.Exists(path));
         }
     }
 }
