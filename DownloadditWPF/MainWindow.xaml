@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DownloadditWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Downloaddit" Height="600" Width="800">
     <Grid>
-        
+        <DockPanel Background="#8D8D8D">
+            <Menu DockPanel.Dock="Top" x:Name="menu">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Exit" HorizontalAlignment="Left" Width="139.333333333333" Click="ExitMenuItem_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About" HorizontalAlignment="Left" Width="139.333333333333" Click="AboutMenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <TabControl DockPanel.Dock="Bottom" x:Name="tabControl" Background="#3E3E3E">
+                <TabItem Header="Find Images">
+                    <Grid Background="#3E3E3E">
+                        <StackPanel Margin="30,30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="textBox" Height="23" Width="200" TextWrapping="Wrap" Text="User or Subreddit"/>
+                                <RadioButton x:Name="radioButton" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="User" IsChecked="True"/>
+                                <RadioButton x:Name="radioButton1" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="Subreddit"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+                                <Label x:Name="label" Foreground="White"  Content="Max number of pages:"/>
+                                <TextBox x:Name="textBox1" Height="23" Width="50" Margin="10,0,0,0" Text="10" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                                <Button x:Name="button" Padding="5" Content="Find Images"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Download Images">
+                    <Grid Background="#3E3E3E">
+                        <StackPanel Margin="10,10">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label x:Name="label_pages" Foreground="White" Content="Pages scanned:"/>
+                                <Label x:Name="label_pages_scanned" Foreground="White" Content="0"/>
+                                <Label x:Name="label_images" Margin="20,0,0,0" Foreground="White" Content="Images found:"/>
+                                <Label x:Name="label_images_found" Foreground="White" Content="0"/>
+                                <Button x:Name="button_cancel" Margin="20,0,0,0" Padding="5" Content="Cancel"/>
+                            </StackPanel>
+                            <DockPanel Margin="0,20,0,0" VerticalAlignment="Stretch" Height="Auto">
+                                <DataGrid x:Name="dataGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </DockPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                                <Label x:Name="label_destination" Foreground="White" Content="Destination:"/>
+                                <TextBox x:Name="textBox_destination" Margin="5,0,0,0" Height="23" Width="200" TextWrapping="Wrap" />
+                                <Button x:Name="button_browse" Margin="10,0,0,0" Padding="5" Content="Browse"/>
+                                <Button x:Name="button_save" Margin="40,0,0,0" Padding="5" Content="Save Selected Images"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

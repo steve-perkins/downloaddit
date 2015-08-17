@@ -24,5 +24,20 @@
         {
             InitializeComponent();
         }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show(
+@"Downloaddit, version 1.0
+by Steve Perkins
+http://steveperkins.com
+https://github.com/steve-perkins/downloaddit"
+    , "About");
+        }
     }
 }
