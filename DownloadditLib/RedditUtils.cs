@@ -9,14 +9,11 @@
     {
         public static void ParsePage(
             Uri url,
-            out List<string> imageUrls,
-            out List<string> albumUrls,
+            ref List<string> imageUrls,
+            ref List<string> albumUrls,
             out string nextPageUrl
         )
         {
-            imageUrls = new List<string>();
-            albumUrls = new List<string>();
-
             string json = HttpUtils.RetrieveTextFromHttp(url);
             RedditElement redditElement = JsonConvert.DeserializeObject<RedditElement>(json);
             foreach (RedditElement post in redditElement.Data.Children)

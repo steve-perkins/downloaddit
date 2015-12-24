@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloadditWPF", "DownloadditWPF\DownloadditWPF.csproj", "{B3850728-3736-4C13-B2FD-832982CC4EDC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A92B92F3-6CF1-48B1-85E2-2D417BAC0BE3} = {A92B92F3-6CF1-48B1-85E2-2D417BAC0BE3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloadditLib", "DownloadditLib\DownloadditLib.csproj", "{A92B92F3-6CF1-48B1-85E2-2D417BAC0BE3}"
 EndProject

@@ -22,16 +22,16 @@
                     <Grid Background="#3E3E3E">
                         <StackPanel Margin="30,30" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="textBox" Height="23" Width="200" TextWrapping="Wrap" Text="User or Subreddit"/>
-                                <RadioButton x:Name="radioButton" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="User" IsChecked="True"/>
-                                <RadioButton x:Name="radioButton1" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="Subreddit"/>
+                                <TextBox x:Name="EntityTextBox" Height="23" Width="200" TextWrapping="Wrap" Text="User or Subreddit"/>
+                                <RadioButton x:Name="UserEntityType" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="User" IsChecked="True"/>
+                                <RadioButton x:Name="SubredditEntityType" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="Subreddit"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
                                 <Label x:Name="label" Foreground="White"  Content="Max number of pages:"/>
-                                <TextBox x:Name="textBox1" Height="23" Width="50" Margin="10,0,0,0" Text="10" VerticalAlignment="Center"/>
+                                <TextBox x:Name="MaxPagesTextBox" Height="23" Width="50" Margin="10,0,0,0" Text="10" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-                                <Button x:Name="button" Padding="5" Content="Find Images"/>
+                                <Button x:Name="FindImagesButton" Padding="5" Content="Find Images" Click="FindImagesButton_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

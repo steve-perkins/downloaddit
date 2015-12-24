@@ -36,11 +36,12 @@
         [TestMethod]
         public void TestRedditParsePage()
         {
-            List<string> imageUrls, albumUrls; 
+            List<string> imageUrls = new List<string>();
+            List<string> albumUrls = new List<string>();
             string nextPageCursor;
 
             Uri redditUrl = RedditUtils.BuildUrl("downloaddit", RedditEntity.User);
-            RedditUtils.ParsePage(redditUrl, out imageUrls, out albumUrls, out nextPageCursor);
+            RedditUtils.ParsePage(redditUrl, ref imageUrls, ref albumUrls, out nextPageCursor);
             
             Assert.AreEqual(7, imageUrls.Count);
             Assert.IsTrue(imageUrls.Contains("https://i.imgur.com/S4C7aXQ.jpg"));
@@ -58,14 +59,14 @@
             Assert.IsNotNull(nextPageCursor);
 
             redditUrl = RedditUtils.BuildUrl("downloaddit", RedditEntity.User, nextPageCursor);
-            RedditUtils.ParsePage(redditUrl, out imageUrls, out albumUrls, out nextPageCursor);
+            RedditUtils.ParsePage(redditUrl, ref imageUrls, ref albumUrls, out nextPageCursor);
 
-            Assert.AreEqual(3, imageUrls.Count);
+            Assert.AreEqual(10, imageUrls.Count);  // 3 were added to the initial 7
             Assert.IsTrue(imageUrls.Contains("https://i.imgur.com/zpCdbSo.jpg"));
             Assert.IsTrue(imageUrls.Contains("https://i.imgur.com/NAjPBsa.jpg"));
             Assert.IsTrue(imageUrls.Contains("https://i.imgur.com/7gnUdfU.jpg"));
 
-            Assert.AreEqual(2, albumUrls.Count);
+            Assert.AreEqual(4, albumUrls.Count);  // 2 were added to the initial 2
             Assert.IsTrue(albumUrls.Contains("http://imgur.com/a/Rjjn2"));
             Assert.IsTrue(albumUrls.Contains("http://imgur.com/gallery/w32RT/new"));
 
