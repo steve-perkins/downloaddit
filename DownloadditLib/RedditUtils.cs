@@ -9,8 +9,8 @@
     {
         public static void ParsePage(
             Uri url,
-            ref List<string> imageUrls,
-            ref List<string> albumUrls,
+            ref HashSet<string> imageUrls,
+            ref HashSet<string> albumUrls,
             out string nextPageUrl
         )
         {

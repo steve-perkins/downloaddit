@@ -8,10 +8,18 @@
     {
         public static string RetrieveTextFromHttp(Uri url)
         {
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(url);
-            StreamReader reader = new StreamReader(stream);
-            return reader.ReadToEnd();
+            try
+            {
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead(url);
+                StreamReader reader = new StreamReader(stream);
+                return reader.ReadToEnd();
+            }
+            catch (WebException e)
+            {
+                Console.WriteLine("There was an error retrieving URL [{0}]:  {1}", url == null ? "null" : url.ToString(), e);
+                return "";
+            }
         }
 
         public static void DownloadBinaryFile(Uri url, string targetDirectory)

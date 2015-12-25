@@ -36,8 +36,8 @@
         [TestMethod]
         public void TestRedditParsePage()
         {
-            List<string> imageUrls = new List<string>();
-            List<string> albumUrls = new List<string>();
+            HashSet<string> imageUrls = new HashSet<string>();
+            HashSet<string> albumUrls = new HashSet<string>();
             string nextPageCursor;
 
             Uri redditUrl = RedditUtils.BuildUrl("downloaddit", RedditEntity.User);

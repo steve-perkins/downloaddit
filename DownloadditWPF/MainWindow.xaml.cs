@@ -45,13 +45,13 @@ https://github.com/steve-perkins/downloaddit"
 
             // Parse Imgur image and album URL's for the given Reddit user or subuser, stopping when we 
             // either run out of pages or else hit the maximum page count
-            List<string> imageUrls = new List<string>();
-            List<string> albumUrls = new List<string>();
+            HashSet<string> imageUrls = new HashSet<string>();
+            HashSet<string> albumUrls = new HashSet<string>();
             string nextPageCursor = "";
             for (int index = 0; index < maxPages && nextPageCursor != null; index++)
             {
                 Console.WriteLine("Processing page {0} for {1} {2}", index + 1, type.ToString().ToLower(), entity);
-                Uri redditUrl = RedditUtils.BuildUrl(entity, type);
+                Uri redditUrl = RedditUtils.BuildUrl(entity, type, "".Equals(nextPageCursor) ? null : nextPageCursor);
                 RedditUtils.ParsePage(redditUrl, ref imageUrls, ref albumUrls, out nextPageCursor);
                 if (nextPageCursor != null) Console.WriteLine("nextPageCursor == {0}", nextPageCursor);
             }
@@ -59,7 +59,7 @@ https://github.com/steve-perkins/downloaddit"
 
             // Parse out image URL's from the albums
             var imagesFromAlbums = albumUrls.SelectMany(albumUrl => ImgurUtils.ParseAlbum(new Uri(albumUrl)));
-            imageUrls = imageUrls.Concat(imagesFromAlbums.ToList()).ToList();
+            imageUrls.UnionWith(imagesFromAlbums);
             Console.WriteLine("There are {0} total images after extracting {1} from albums", imageUrls.Count, imagesFromAlbums.ToList().Count);
 
             // TODO:  Populate the data grid and other fields on the second tab
