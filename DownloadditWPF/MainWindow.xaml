@@ -17,8 +17,8 @@
                 </MenuItem>
             </Menu>
 
-            <TabControl DockPanel.Dock="Bottom" x:Name="tabControl" Background="#3E3E3E">
-                <TabItem Header="Find Images">
+            <TabControl DockPanel.Dock="Bottom" x:Name="MainTabControl" Background="#3E3E3E">
+                <TabItem x:Name="FindImagesTabItem" Header="Find Images">
                     <Grid Background="#3E3E3E">
                         <StackPanel Margin="30,30" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
@@ -27,7 +27,7 @@
                                 <RadioButton x:Name="SubredditEntityType" GroupName="EntityType" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" Content="Subreddit"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                                <Label x:Name="label" Foreground="White"  Content="Max number of pages:"/>
+                                <Label x:Name="MaxPagesLabel" Foreground="White"  Content="Max number of pages:"/>
                                 <TextBox x:Name="MaxPagesTextBox" Height="23" Width="50" Margin="10,0,0,0" Text="10" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
@@ -36,24 +36,41 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Download Images">
+                <TabItem x:Name="DownloadImagesTabItem" Header="Download Images">
                     <Grid Background="#3E3E3E">
                         <StackPanel Margin="10,10">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label x:Name="label_pages" Foreground="White" Content="Pages scanned:"/>
-                                <Label x:Name="label_pages_scanned" Foreground="White" Content="0"/>
-                                <Label x:Name="label_images" Margin="20,0,0,0" Foreground="White" Content="Images found:"/>
-                                <Label x:Name="label_images_found" Foreground="White" Content="0"/>
-                                <Button x:Name="button_cancel" Margin="20,0,0,0" Padding="5" Content="Cancel"/>
+                                <Label x:Name="PagesLabel" Foreground="White" Content="Pages scanned:"/>
+                                <Label x:Name="PageCountLabel" Foreground="White" Content="0"/>
+                                <Label x:Name="ImagesLabel" Margin="20,0,0,0" Foreground="White" Content="Images found:"/>
+                                <Label x:Name="ImagesCountLabel" Foreground="White" Content="0"/>
+                                <Button x:Name="CancelFindButton" Margin="20,0,0,0" Padding="5" Content="Cancel Finding Images"/>
                             </StackPanel>
-                            <DockPanel Margin="0,20,0,0" VerticalAlignment="Stretch" Height="Auto">
-                                <DataGrid x:Name="dataGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            <DockPanel Margin="0,20,0,0" VerticalAlignment="Stretch" Height="300" Width="400">
+                                <DataGrid x:Name="ImagesDataGrid" 
+                                          HorizontalAlignment="Stretch" ScrollViewer.CanContentScroll="True" 
+                                          ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                          AlternationCount="2"
+                                          LoadingRow="ImagesDataGrid_LoadingRow">
+                                    <DataGrid.RowStyle>
+                                        <Style TargetType="DataGridRow">
+                                            <Style.Triggers>
+                                                <Trigger Property="AlternationIndex" Value="1">
+                                                    <Setter Property="Background" Value="LightGray"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.RowStyle>
+                                </DataGrid>
                             </DockPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                                <Label x:Name="label_destination" Foreground="White" Content="Destination:"/>
-                                <TextBox x:Name="textBox_destination" Margin="5,0,0,0" Height="23" Width="200" TextWrapping="Wrap" />
-                                <Button x:Name="button_browse" Margin="10,0,0,0" Padding="5" Content="Browse"/>
-                                <Button x:Name="button_save" Margin="40,0,0,0" Padding="5" Content="Save Selected Images"/>
+                                <Label x:Name="DestinationLabel" Foreground="White" Content="Destination:"/>
+                                <TextBox x:Name="DestinationTextBox" Margin="5,0,0,0" Height="23" Width="200" TextWrapping="Wrap" />
+                                <Button x:Name="BrowseButton" Margin="10,0,0,0" Padding="5" Content="Browse"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                                <Button x:Name="DownloadButton" Margin="40,0,0,0" Padding="5" Content="Save Selected Images"/>
+                                <Button x:Name="CancelDownloadButton" Margin="40,0,0,0" Padding="5" Content="Cancel Downloads"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
