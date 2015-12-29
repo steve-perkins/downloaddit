@@ -95,6 +95,16 @@ https://github.com/steve-perkins/downloaddit"
         {
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
+
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult dialogResult = folderBrowserDialog.ShowDialog();
+            if (System.Windows.Forms.DialogResult.OK == dialogResult)
+            {
+                DestinationTextBox.Text = folderBrowserDialog.SelectedPath;
+            }
+        }
     }
 
     /// <summary>
