@@ -96,6 +96,11 @@ https://github.com/steve-perkins/downloaddit"
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
 
+        /// <summary>
+        /// Event handler to select a destination folder when the Browse button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -104,6 +109,21 @@ https://github.com/steve-perkins/downloaddit"
             {
                 DestinationTextBox.Text = folderBrowserDialog.SelectedPath;
             }
+        }
+
+        /// <summary>
+        /// Event handler to download images when the Save button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            string destination = DestinationTextBox.Text;
+            foreach (ImgurUrl item in ImagesDataGrid.ItemsSource)
+            {
+                HttpUtils.DownloadBinaryFile(new Uri(item.URL), destination);
+            }
+            Console.WriteLine("Downloads complete!");
         }
     }
 
