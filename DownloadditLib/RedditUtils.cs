@@ -16,24 +16,26 @@
         {
             string json = HttpUtils.RetrieveTextFromHttp(url);
             RedditElement redditElement = JsonConvert.DeserializeObject<RedditElement>(json);
-            foreach (RedditElement post in redditElement.Data.Children)
+            if (redditElement?.Data?.Children != null)
             {
-                string domain = post.Data.Domain;
-                if (domain.ToLower().EndsWith("imgur.com"))
+                foreach (RedditElement post in redditElement.Data.Children)
                 {
-                    string urlTail = post.Data.Url.Remove(0, post.Data.Url.LastIndexOf('/'));
-                    if (urlTail.Contains('.'))
+                    string domain = post.Data.Domain;
+                    if (domain.ToLower().EndsWith("imgur.com"))
                     {
-                        imageUrls.Add(post.Data.Url);
-                    }
-                    else
-                    {
-                        albumUrls.Add(post.Data.Url);
+                        string urlTail = post.Data.Url.Remove(0, post.Data.Url.LastIndexOf('/'));
+                        if (urlTail.Contains('.'))
+                        {
+                            imageUrls.Add(post.Data.Url);
+                        }
+                        else
+                        {
+                            albumUrls.Add(post.Data.Url);
+                        }
                     }
                 }
             }
-
-            nextPageUrl = redditElement.Data.After;
+            nextPageUrl = redditElement?.Data?.After;
         }
 
         public static Uri BuildUrl(string entity, RedditEntity entityType, string cursor = null)

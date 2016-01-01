@@ -52,7 +52,7 @@
             using (Stream input = response.GetResponseStream())
             {
                 string targetFile = Path.Combine(targetDirectory, fileName);
-                using (FileStream output = new FileStream(targetFile, FileMode.CreateNew))
+                using (FileStream output = new FileStream(targetFile, FileMode.Create))
                 {
                     int bytesRead;
                     while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
